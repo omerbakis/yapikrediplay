@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         *,
         *::before,
@@ -804,9 +805,12 @@
 
     <!-- TOP BAR -->
     <header class="topbar">
-        <div class="site-name">Müzik<span>Deposu</span></div>
+        <a href="landing.html" class="nav-logo" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="logo-1e5f04b9-1603-48fb-a362-9e445a1ba25e.webp" alt="Yapı Kredi Play"
+                style="height: 80px; width: auto; object-fit: contain; display: block; margin: -30px 0;">
+        </a>
         <div class="cart-badge">
-            🛒 Sepetim
+            <i data-lucide="shopping-cart" style="width: 18px; height: 18px;"></i> Sepetim
             <span class="cart-count">1</span>
         </div>
     </header>
@@ -866,7 +870,7 @@
 
             <!-- PLAY Promo Banner -->
             <div class="play-promo">
-                <div class="promo-icon">⚡</div>
+                <div class="promo-icon"><i data-lucide="zap" style="width: 24px; height: 24px; color: white;"></i></div>
                 <div class="promo-text">
                     <strong>PLAY Kart Avantajı Aktif!</strong>
                     <p>Yapı Kredi PLAY Kart sahipleri bu üründe %50 indirimden yararlanıyor. Fiyat farkını aşağıda
@@ -904,7 +908,7 @@
 
                 <!-- Savings Pill -->
                 <div class="savings-pill">
-                    <span class="s-icon">💰</span>
+                    <span class="s-icon"><i data-lucide="wallet" style="width: 20px; height: 20px;"></i></span>
                     <div>
                         <div class="s-text">40.000 ₺ tasarruf ediyorsun!</div>
                         <div class="s-sub">PLAY Kart ile %50 indirim</div>
@@ -951,9 +955,12 @@
 
                 <!-- Trust -->
                 <div class="trust-row">
-                    <span class="trust-badge"><span class="t-icon">🔒</span> Güvenli Ödeme</span>
-                    <span class="trust-badge"><span class="t-icon">↩️</span> Kolay İade</span>
-                    <span class="trust-badge"><span class="t-icon">⚡</span> Hızlı Teslimat</span>
+                    <span class="trust-badge"><span class="t-icon"><i data-lucide="shield-check"
+                                style="width:14px; height:14px;"></i></span> Güvenli Ödeme</span>
+                    <span class="trust-badge"><span class="t-icon"><i data-lucide="refresh-ccw"
+                                style="width:14px; height:14px;"></i></span> Kolay İade</span>
+                    <span class="trust-badge"><span class="t-icon"><i data-lucide="zap"
+                                style="width:14px; height:14px;"></i></span> Hızlı Teslimat</span>
                 </div>
             </div>
 
@@ -994,7 +1001,9 @@
             document.getElementById('play-price').textContent = fmt(prices.play * qty);
         }
     </script>
-
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
