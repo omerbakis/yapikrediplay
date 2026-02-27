@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sepetim – Müzik Deposu</title>
+    <title>Yapı Kredi Play Kart – Alışverişin Keyfi Seninle</title>
     <meta name="description"
-        content="Sepetinizde ürün var. Yapı Kredi PLAY Kart ile çok daha avantajlı fiyatlardan alışveriş yapın.">
+        content="Yapı Kredi Play Kart ile alışverişte, ATM'de ve dijital dünyada ayrıcalıklı bir deneyim yaşa.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         *,
         *::before,
@@ -25,13 +25,10 @@
             --orange: #F26522;
             --orange-lt: #F7941D;
             --dark: #1C1C1C;
-            --dark2: #252525;
-            --dark3: #2D2D2D;
+            --dark2: #2D2D2D;
             --gray: #B0B0B0;
             --light: #F5F5F5;
             --white: #FFFFFF;
-            --green: #22C55E;
-            --red: #EF4444;
         }
 
         html {
@@ -40,699 +37,1043 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #111;
+            background: var(--dark);
             color: var(--white);
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* ─── TOP BAR ─────────────────────────────────── */
-        .topbar {
-            background: rgba(17, 17, 17, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 20px 40px;
+        /* ─── NAV ─────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 18px 60px;
+            background: rgba(28, 28, 28, 0.72);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background .3s;
         }
 
-        .site-name {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--white);
-            letter-spacing: -0.5px;
-        }
-
-        .site-name span {
-            color: var(--orange);
-        }
-
-        .cart-badge {
+        .nav-logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
         }
 
-        .cart-count {
-            background: var(--orange);
-            color: #fff;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
+        .nav-logo img {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: -40px 0;
+        }
+
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
+            gap: 36px;
+            list-style: none;
         }
 
-        /* ─── PROGRESS BAR ────────────────────────────── */
-        .progress-row {
-            background: var(--dark2);
-            padding: 20px 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .progress-steps {
-            display: flex;
-            align-items: center;
-            gap: 0;
-            max-width: 500px;
-        }
-
-        .ps {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .ps-num {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .ps.active .ps-num {
-            background: var(--orange);
-            color: #fff;
-        }
-
-        .ps.active .ps-label {
-            color: var(--white);
-        }
-
-        .ps.inactive .ps-num {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.35);
-        }
-
-        .ps.inactive .ps-label {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .ps-connector {
-            width: 60px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.08);
-            margin: 0 12px;
-        }
-
-        /* ─── MAIN LAYOUT ─────────────────────────────── */
-        .page-wrap {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 24px 80px;
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 32px;
-            align-items: start;
-        }
-
-        /* ─── CART PANEL ──────────────────────────────── */
-        .cart-panel h2 {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            color: var(--white);
-        }
-
-        .cart-panel h2 span {
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, .7);
             font-size: 14px;
             font-weight: 500;
-            color: var(--gray);
-            margin-left: 10px;
+            transition: color .2s;
         }
 
-        .cart-item {
-            background: var(--dark2);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 20px;
-            padding: 24px;
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-cta {
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s, transform .2s, box-shadow .2s;
+            box-shadow: 0 4px 20px rgba(242, 101, 34, .35);
+        }
+
+        .nav-cta:hover {
+            background: var(--orange-lt);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(242, 101, 34, .5);
+        }
+
+        /* ─── HERO ─────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
             display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 24px;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 120px 60px 80px;
             position: relative;
             overflow: hidden;
+            background: radial-gradient(ellipse 80% 70% at 70% 50%, rgba(242, 101, 34, .12) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 60% at 20% 80%, rgba(242, 101, 34, .07) 0%, transparent 60%), var(--dark);
         }
 
-        .cart-item::before {
-            content: '';
+        .hero-bg-poly {
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse 80% 60% at 10% 50%, rgba(242, 101, 34, 0.05) 0%, transparent 70%);
-            pointer-events: none;
+            z-index: 0;
+            background:
+                linear-gradient(135deg, rgba(242, 101, 34, .06) 0%, transparent 50%),
+                linear-gradient(225deg, rgba(242, 101, 34, .04) 0%, transparent 50%);
         }
 
-        .item-img-wrap {
-            width: 140px;
-            height: 140px;
-            background: #fff;
-            border-radius: 14px;
-            overflow: hidden;
-            flex-shrink: 0;
+        /* animated grid lines */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+            animation: gridShift 20s linear infinite;
+        }
+
+        @keyframes gridShift {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(60px, 60px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(242, 101, 34, .15);
+            border: 1px solid rgba(242, 101, 34, .35);
+            color: var(--orange);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 28px;
+            animation: fadeUp .8s ease both;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--orange);
+            animation: pulse 1.5s ease infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .5;
+                transform: scale(1.4)
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(42px, 5.5vw, 80px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            animation: fadeUp .8s .1s ease both;
+        }
+
+        .hero-title .highlight {
+            position: relative;
+            display: inline-block;
+            color: var(--orange);
+            padding-bottom: 8px;
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--orange-lt));
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: lineGrow 1s .8s ease forwards;
+        }
+
+        @keyframes lineGrow {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: rgba(255, 255, 255, .6);
+            line-height: 1.7;
+            max-width: 480px;
+            margin-bottom: 40px;
+            animation: fadeUp .8s .2s ease both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeUp .8s .3s ease both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+            color: #fff;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(242, 101, 34, .45);
+            transition: transform .25s, box-shadow .25s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(242, 101, 34, .55);
+        }
+
+        .btn-primary svg {
+            transition: transform .25s;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(4px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .15);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: background .25s, transform .25s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, .12);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 56px;
+            animation: fadeUp .8s .4s ease both;
+        }
+
+        .stat {}
+
+        .stat-num {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--orange);
+        }
+
+        .stat-num span {
+            font-size: 18px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* hero card */
+        .hero-visual {
+            position: relative;
+            z-index: 1;
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: fadeUp .8s .2s ease both;
         }
 
-        .item-img-wrap img {
+        .card-wrap {
+            position: relative;
+            width: 420px;
+            height: 280px;
+            perspective: 1200px;
+        }
+
+        .card-3d {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            padding: 8px;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, .7), 0 0 0 1px rgba(255, 255, 255, .06);
+            transform: rotateY(-18deg) rotateX(8deg);
+            transition: transform .6s cubic-bezier(.23, 1, .32, 1), box-shadow .6s;
+            animation: cardFloat 6s ease-in-out infinite;
+            position: relative;
         }
 
-        .item-details {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                transform: rotateY(-18deg) rotateX(8deg) translateY(0);
+            }
+
+            50% {
+                transform: rotateY(-14deg) rotateX(5deg) translateY(-14px);
+            }
         }
 
-        .item-brand {
-            font-size: 11px;
+        .card-3d:hover {
+            transform: rotateY(-6deg) rotateX(3deg) translateY(-8px) !important;
+            box-shadow: 0 60px 120px rgba(0, 0, 0, .8), 0 0 60px rgba(242, 101, 34, .25);
+            animation: none;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* glow rings */
+        .glow-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(242, 101, 34, .18);
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+
+        .glow-ring:nth-child(1) {
+            width: 320px;
+            height: 320px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0s;
+        }
+
+        .glow-ring:nth-child(2) {
+            width: 440px;
+            height: 440px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: .6s;
+        }
+
+        .glow-ring:nth-child(3) {
+            width: 560px;
+            height: 560px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1.2s;
+        }
+
+        @keyframes ringPulse {
+
+            0%,
+            100% {
+                opacity: .4;
+                transform: translate(-50%, -50%) scale(1)
+            }
+
+            50% {
+                opacity: .1;
+                transform: translate(-50%, -50%) scale(1.06)
+            }
+        }
+
+        /* ─── SECTION COMMONS ─────────────────────────── */
+        section {
+            padding: 100px 60px;
+        }
+
+        .section-label {
+            font-size: 12px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: var(--orange);
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 12px;
         }
 
-        .item-name {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--white);
-            line-height: 1.3;
-            margin-bottom: 8px;
-        }
-
-        .item-meta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        .section-title {
+            font-size: clamp(32px, 4vw, 56px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
             margin-bottom: 16px;
         }
 
-        .item-tag {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 4px 10px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 500;
-        }
-
-        .item-tag.green {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: rgba(34, 197, 94, 0.25);
-            color: #4ADE80;
-        }
-
-        .item-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 6px 14px;
-        }
-
-        .qty-btn {
-            background: none;
-            border: none;
-            color: var(--orange);
+        .section-sub {
             font-size: 18px;
-            cursor: pointer;
-            font-weight: 700;
-            line-height: 1;
-            padding: 0 2px;
-            transition: opacity 0.2s;
+            color: rgba(255, 255, 255, .55);
+            max-width: 520px;
+            line-height: 1.7;
         }
 
-        .qty-btn:hover {
-            opacity: 0.7;
+        /* ─── FEATURES ─────────────────────────────────── */
+        #features {
+            background: var(--dark2);
         }
 
-        .qty-val {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--white);
-            min-width: 18px;
-            text-align: center;
+        .features-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .remove-btn {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.25);
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: color 0.2s;
-            text-decoration: underline;
+        .features-header {}
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-content: start;
         }
 
-        .remove-btn:hover {
-            color: var(--red);
-        }
-
-        /* ─── PLAY PROMO BANNER ───────────────────────── */
-        .play-promo {
-            background: linear-gradient(135deg, rgba(242, 101, 34, 0.12) 0%, rgba(247, 148, 29, 0.08) 100%);
-            border: 1px solid rgba(242, 101, 34, 0.3);
-            border-radius: 16px;
-            padding: 20px 24px;
-            margin-top: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
+        .feat-card {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 20px;
+            padding: 28px;
+            cursor: default;
+            transition: background .3s, border-color .3s, transform .3s;
             position: relative;
             overflow: hidden;
         }
 
-        .play-promo::before {
+        .feat-card::before {
+            content: attr(data-num);
+            position: absolute;
+            right: 20px;
+            top: 16px;
+            font-size: 48px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, .04);
+            font-style: italic;
+            line-height: 1;
+        }
+
+        .feat-card:hover {
+            background: rgba(242, 101, 34, .08);
+            border-color: rgba(242, 101, 34, .3);
+            transform: translateY(-4px);
+        }
+
+        .feat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(242, 101, 34, .25), rgba(242, 101, 34, .1));
+            font-size: 22px;
+        }
+
+        .feat-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feat-card p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, .5);
+            line-height: 1.6;
+        }
+
+        /* ─── HOW IT WORKS ─────────────────────────────── */
+        #how {
+            background: var(--dark);
+        }
+
+        .how-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .how-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 20px;
+            padding: 32px 24px;
+            position: relative;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .step:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .4);
+        }
+
+        .step-num {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 24px;
+            box-shadow: 0 6px 20px rgba(242, 101, 34, .4);
+        }
+
+        .step h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, .5);
+            line-height: 1.6;
+        }
+
+        .step-connector {
+            position: absolute;
+            right: -13px;
+            top: 42px;
+            width: 26px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--orange), transparent);
+            z-index: 2;
+        }
+
+        .step:last-child .step-connector {
+            display: none;
+        }
+
+        /* ─── BENEFITS BANNER ──────────────────────────── */
+        #benefits {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-lt) 50%, #F9B233 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 80px 60px;
+        }
+
+        #benefits::before {
             content: 'PLAY';
             position: absolute;
-            right: -8px;
+            right: -20px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 80px;
+            font-size: 240px;
             font-weight: 900;
-            color: rgba(242, 101, 34, 0.07);
-            letter-spacing: -3px;
+            color: rgba(255, 255, 255, .07);
+            letter-spacing: -8px;
             pointer-events: none;
             user-select: none;
         }
 
-        .promo-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+        .benefits-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefits-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .9);
+        }
+
+        .check-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .25);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .benefits-card-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .benefits-card-wrap {
+            width: 360px;
+            height: 240px;
+            position: relative;
+            filter: drop-shadow(0 30px 70px rgba(0, 0, 0, .6));
+            animation: cardFloat2 5s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat2 {
+
+            0%,
+            100% {
+                transform: rotate(-2deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(2deg) translateY(-12px);
+            }
+        }
+
+        .benefits-card-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
+        .benefits-header .section-title {
+            color: #fff;
+        }
+
+        .benefits-header .section-label {
+            color: rgba(255, 255, 255, .8);
+        }
+
+        .benefits-header .section-sub {
+            color: rgba(255, 255, 255, .75);
+        }
+
+        /* ─── CTA ──────────────────────────────────────── */
+        #cta {
+            background: var(--dark2);
+            text-align: center;
+            padding: 100px 60px;
+        }
+
+        .cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-inner .section-title {
+            font-size: clamp(32px, 4.5vw, 60px);
+            margin-bottom: 20px;
+        }
+
+        .cta-inner .section-sub {
+            margin: 0 auto 48px;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .qr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-top: 48px;
+            color: rgba(255, 255, 255, .6);
+            font-size: 13px;
+        }
+
+        .qr-badge strong {
+            color: var(--orange);
+            display: block;
+            font-size: 14px;
+        }
+
+        .qr-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ─── FOOTER ─────────────────────────────────── */
+        footer {
+            background: #111;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        footer .foot-left {
+            font-size: 13px;
+            color: rgba(255, 255, 255, .35);
+        }
+
+        footer .foot-left a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        footer .foot-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        footer .foot-links a {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .4);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        footer .foot-links a:hover {
+            color: var(--orange);
+        }
+
+        /* ─── TICKER ─────────────────────────────────── */
+        .ticker-wrap {
+            background: var(--orange);
+            overflow: hidden;
+            padding: 14px 0;
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 0;
+            animation: ticker 22s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            padding: 0 40px;
+            letter-spacing: 1px;
+        }
+
+        .ticker-dot {
+            color: rgba(255, 255, 255, .5);
+        }
+
+        @keyframes ticker {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ─── STUDENT SECTION ───────────────────────── */
+        #student {
+            background: var(--dark);
+        }
+
+        .student-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .student-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .student-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .sc {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 20px;
+            padding: 24px 28px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: background .3s, border-color .3s, transform .3s;
+        }
+
+        .sc:hover {
+            background: rgba(242, 101, 34, .07);
+            border-color: rgba(242, 101, 34, .25);
+            transform: translateX(6px);
+        }
+
+        .sc-icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(242, 101, 34, .3), rgba(242, 101, 34, .1));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(242, 101, 34, 0.4);
         }
 
-        .promo-text {
-            flex: 1;
-        }
-
-        .promo-text strong {
-            display: block;
-            font-size: 14px;
+        .sc-body h4 {
+            font-size: 15px;
             font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .sc-body p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, .5);
+            line-height: 1.55;
+        }
+
+        .sc-body .sc-tag {
+            display: inline-block;
+            margin-top: 8px;
+            background: rgba(242, 101, 34, .18);
             color: var(--orange);
-            margin-bottom: 3px;
+            border-radius: 50px;
+            padding: 3px 10px;
+            font-size: 11px;
+            font-weight: 700;
         }
 
-        .promo-text p {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.55);
-            line-height: 1.5;
-        }
-
-        .promo-savings {
-            background: linear-gradient(135deg, var(--orange), var(--orange-lt));
-            border-radius: 10px;
-            padding: 8px 14px;
-            text-align: center;
-            flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(242, 101, 34, 0.3);
-        }
-
-        .promo-savings .save-label {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .promo-savings .save-amount {
-            font-size: 20px;
-            font-weight: 900;
-            color: #fff;
-            line-height: 1.2;
-        }
-
-        /* ─── ORDER SUMMARY ───────────────────────────── */
-        .summary-panel {
-            position: sticky;
-            top: 90px;
-        }
-
-        .summary-box {
-            background: var(--dark2);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 20px;
-            padding: 28px;
-            overflow: hidden;
+        /* Harçlık spotlight */
+        .harc-spotlight {
+            background: linear-gradient(145deg, rgba(242, 101, 34, .12), rgba(242, 101, 34, .04));
+            border: 1px solid rgba(242, 101, 34, .25);
+            border-radius: 28px;
+            padding: 40px;
             position: relative;
+            overflow: hidden;
         }
 
-        .summary-box::before {
-            content: '';
+        .harc-spotlight::after {
+            content: '₺';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--orange), var(--orange-lt), #F9B233);
+            right: -10px;
+            bottom: -30px;
+            font-size: 180px;
+            font-weight: 900;
+            color: rgba(242, 101, 34, .06);
+            pointer-events: none;
+            line-height: 1;
         }
 
-        .summary-title {
-            font-size: 18px;
-            font-weight: 800;
+        .harc-amount {
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--orange);
+            letter-spacing: -3px;
+            line-height: 1;
+            margin: 16px 0 8px;
+        }
+
+        .harc-amount sup {
+            font-size: 32px;
+            vertical-align: super;
+            margin-right: 4px;
+        }
+
+        .harc-desc {
+            font-size: 15px;
+            color: rgba(255, 255, 255, .6);
+            line-height: 1.65;
             margin-bottom: 24px;
-            color: var(--white);
         }
 
-        /* Price comparison rows */
-        .price-row {
+        .harc-chips {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .price-row:last-of-type {
-            border-bottom: none;
-        }
-
-        .price-label {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.55);
-            font-weight: 500;
-        }
-
-        .price-val {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .price-val.crossed {
-            text-decoration: line-through;
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 500;
-            font-size: 13px;
-        }
-
-        /* Big comparison box */
-        .compare-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .compare-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 14px;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
-        }
-
-        .compare-row:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .compare-left {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .compare-type {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .compare-type.normal {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .compare-type.play {
-            color: var(--orange);
-        }
-
-        .compare-desc {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .compare-price {
-            font-size: 24px;
-            font-weight: 900;
-        }
-
-        .compare-price.normal {
-            color: rgba(255, 255, 255, 0.3);
-            text-decoration: line-through;
-            font-size: 18px;
-        }
-
-        .compare-price.play {
-            color: var(--orange);
-            text-shadow: 0 0 30px rgba(242, 101, 34, 0.4);
-        }
-
-        /* Savings pill */
-        .savings-pill {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.06));
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-        }
-
-        .savings-pill .s-icon {
-            font-size: 18px;
-        }
-
-        .savings-pill .s-text {
-            font-size: 13px;
-            color: #4ADE80;
-            font-weight: 700;
-        }
-
-        .savings-pill .s-sub {
-            font-size: 11px;
-            color: rgba(34, 197, 94, 0.6);
-            font-weight: 500;
-        }
-
-        /* CTA Button */
-        .cta-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--orange), var(--orange-lt));
-            color: #fff;
-            border: none;
-            padding: 18px 24px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(242, 101, 34, 0.45);
-            transition: transform 0.25s, box-shadow 0.25s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            letter-spacing: -0.3px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-btn:hover::before {
-            left: 100%;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 40px rgba(242, 101, 34, 0.6);
-        }
-
-        .cta-btn .arrow {
-            font-size: 20px;
-            transition: transform 0.25s;
-        }
-
-        .cta-btn:hover .arrow {
-            transform: translateX(4px);
-        }
-
-        .cta-note {
-            text-align: center;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 12px;
-            line-height: 1.5;
-        }
-
-        /* Play card chip visual */
-        .play-card-chip {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-top: 16px;
-        }
-
-        .chip-img {
-            width: 48px;
-            height: 30px;
-            object-fit: contain;
-            border-radius: 4px;
-        }
-
-        .chip-text {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
-            line-height: 1.5;
-        }
-
-        .chip-text strong {
-            display: block;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 12px;
-        }
-
-        /* ─── TRUST BADGES ────────────────────────────── */
-        .trust-row {
-            display: flex;
-            gap: 12px;
             flex-wrap: wrap;
-            margin-top: 12px;
+            gap: 8px;
         }
 
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
-            font-weight: 500;
+        .harc-chip {
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .75);
         }
 
-        .trust-badge .t-icon {
-            font-size: 14px;
-        }
-
-        /* ─── SIMILAR PRODUCTS (bottom teaser) ────────── */
-        .also-row {
-            margin-top: 32px;
-        }
-
-        .also-row h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 14px;
-        }
-
-        .also-grid {
-            display: flex;
-            gap: 12px;
-        }
-
-        .also-card {
-            flex: 1;
+        /* zero-fee strip */
+        #zerofee {
             background: var(--dark2);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 14px;
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            opacity: 0.5;
-            filter: blur(0.5px);
-            cursor: default;
+            border-top: 1px solid rgba(255, 255, 255, .05);
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            padding: 60px;
         }
 
-        .also-thumb {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
+        .zee-inner {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .also-info {
-            flex: 1;
+        .fee-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
         }
 
-        .also-name {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.09);
-            border-radius: 4px;
-            margin-bottom: 6px;
-            width: 80%;
+        .fee-card {
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: transform .3s, background .3s, border-color .3s;
         }
 
-        .also-price {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-            width: 50%;
+        .fee-card:hover {
+            transform: translateY(-5px);
+            background: rgba(242, 101, 34, .06);
+            border-color: rgba(242, 101, 34, .2);
         }
 
-        /* ─── ANIMATIONS ──────────────────────────────── */
+        .fee-big {
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--orange);
+            margin: 12px 0 6px;
+            letter-spacing: -1px;
+        }
+
+        .fee-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .fee-card p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, .45);
+            line-height: 1.6;
+        }
+
+        .fee-icon {
+            font-size: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .student-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .fee-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            #zerofee {
+                padding: 60px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fee-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ─── ANIMATIONS ─────────────────────────────── */
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
 
             to {
@@ -741,61 +1082,242 @@
             }
         }
 
-        .cart-item {
-            animation: fadeUp 0.5s 0.1s ease both;
+        /* scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
         }
 
-        .play-promo {
-            animation: fadeUp 0.5s 0.2s ease both;
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .summary-box {
-            animation: fadeUp 0.5s 0.15s ease both;
+        /* ── scroll progress bar ── */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--orange), var(--orange-lt), #F9B233);
+            transition: width .1s linear;
+            box-shadow: 0 0 10px rgba(242, 101, 34, .7);
         }
 
-        @keyframes shimmer {
+        /* ── card shine overlay ── */
+        .card-3d {
+            overflow: hidden;
+        }
+
+        .card-shine {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+            background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .18) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform .55s ease;
+        }
+
+        .card-wrap:hover .card-shine {
+            transform: translateX(120%);
+        }
+
+        /* ── magnetic btn ── */
+        .btn-primary,
+        .btn-secondary,
+        .nav-cta {
+            will-change: transform;
+        }
+
+        /* ── harc pulse ── */
+        .harc-amount {
+            animation: harcPulse 2.8s ease-in-out infinite;
+        }
+
+        @keyframes harcPulse {
 
             0%,
             100% {
-                opacity: 1;
+                text-shadow: 0 0 0 rgba(242, 101, 34, 0);
             }
 
             50% {
-                opacity: 0.7;
+                text-shadow: 0 0 40px rgba(242, 101, 34, .55), 0 0 80px rgba(242, 101, 34, .2);
             }
         }
 
-        .compare-price.play {
-            animation: shimmer 2.5s ease-in-out infinite;
+        /* ── fee card count-up ── */
+        .fee-big {
+            transition: color .3s;
         }
 
-        /* ─── RESPONSIVE ──────────────────────────────── */
-        @media (max-width: 768px) {
-            .page-wrap {
+        .fee-card:hover .fee-big {
+            color: #fff;
+        }
+
+        /* ── feat-card icon spin on hover ── */
+        .feat-icon {
+            transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .feat-card:hover .feat-icon {
+            transform: rotate(12deg) scale(1.15);
+        }
+
+        /* ── sc-icon wiggle ── */
+        .sc:hover .sc-icon {
+            animation: wiggle .4s ease;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+
+            25% {
+                transform: rotate(-8deg)
+            }
+
+            75% {
+                transform: rotate(8deg)
+            }
+        }
+
+        /* ── step bounce on reveal ── */
+        .step.visible .step-num {
+            animation: stepBounce .5s cubic-bezier(.34, 1.56, .64, 1) both;
+        }
+
+        @keyframes stepBounce {
+            from {
+                transform: scale(0) rotate(-30deg)
+            }
+
+            to {
+                transform: scale(1) rotate(0)
+            }
+        }
+
+        /* ── hero stats count-up shimmer ── */
+        .stat-num {
+            position: relative;
+        }
+
+        .stat-num::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 1.2s .5s ease;
+        }
+
+        #hero .stat-num.counted::after {
+            width: 100%;
+        }
+
+        /* ── typewriter cursor ── */
+        .tw-cursor {
+            display: inline-block;
+            width: 3px;
+            height: .85em;
+            background: var(--orange);
+            margin-left: 4px;
+            vertical-align: middle;
+            border-radius: 2px;
+            animation: blink .8s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────── */
+        @media (max-width: 900px) {
+            nav {
+                padding: 14px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            #hero {
                 grid-template-columns: 1fr;
-                padding: 24px 16px 60px;
+                padding: 100px 24px 60px;
             }
 
-            .topbar {
-                padding: 14px 20px;
+            .hero-visual {
+                display: none;
             }
 
-            .progress-row {
-                padding: 16px 20px;
+            .hero-stats {
+                gap: 24px;
             }
 
-            .cart-item {
-                grid-template-columns: 110px 1fr;
-                gap: 16px;
+            section {
+                padding: 70px 24px;
             }
 
-            .item-img-wrap {
-                width: 110px;
-                height: 110px;
+            .features-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .summary-panel {
-                position: static;
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .step-connector {
+                display: none;
+            }
+
+            .benefits-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-card-visual {
+                display: none;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 24px;
+            }
+
+            #benefits::before {
+                font-size: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -803,205 +1325,522 @@
 
 <body>
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-        <a href="landing.html" class="nav-logo" style="display: flex; align-items: center; text-decoration: none;">
-            <img src="logo-1e5f04b9-1603-48fb-a362-9e445a1ba25e.webp" alt="Yapı Kredi Play"
-                style="height: 80px; width: auto; object-fit: contain; display: block; margin: -30px 0;">
-        </a>
-        <div class="cart-badge">
-            <i data-lucide="shopping-cart" style="width: 18px; height: 18px;"></i> Sepetim
-            <span class="cart-count">1</span>
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-logo">
+            <img src="logo-1e5f04b9-1603-48fb-a362-9e445a1ba25e.webp" alt="Yapı Kredi Play" />
         </div>
-    </header>
+        <ul class="nav-links">
+            <li><a href="#features">Özellikler</a></li>
+            <li><a href="#student">Öğrenci</a></li>
+            <li><a href="#zerofee">0 Ücret</a></li>
+            <li><a href="#benefits">Avantajlar</a></li>
+            <li><a href="#cta">Başvur</a></li>
+        </ul>
+        <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Hemen
+            Başvur →</button>
+    </nav>
 
-    <!-- PROGRESS -->
-    <div class="progress-row">
-        <div class="progress-steps">
-            <div class="ps active">
-                <div class="ps-num">1</div>
-                <div class="ps-label" style="font-size:13px;color:#fff;">Sepet</div>
-            </div>
-            <div class="ps-connector"></div>
-            <div class="ps inactive">
-                <div class="ps-num">2</div>
-                <div class="ps-label" style="font-size:13px;">Ödeme</div>
-            </div>
-            <div class="ps-connector"></div>
-            <div class="ps inactive">
-                <div class="ps-num">3</div>
-                <div class="ps-label" style="font-size:13px;">Onay</div>
-            </div>
-        </div>
+    <!-- TICKER -->
+    <div class="ticker-wrap" style="margin-top:72px">
+        <div class="ticker-track" id="ticker"></div>
     </div>
 
-    <!-- MAIN -->
-    <div class="page-wrap">
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg-poly"></div>
+        <div class="hero-grid"></div>
 
-        <!-- LEFT: CART -->
-        <div class="cart-panel">
-            <h2>Sepetim <span>1 ürün</span></h2>
-
-            <!-- Cart Item -->
-            <div class="cart-item">
-                <div class="item-img-wrap">
-                    <img src="davul.jpg" alt="Roland V-Drums Elektronik Davul Seti">
-                </div>
-                <div class="item-details">
-                    <div>
-                        <div class="item-brand">Roland</div>
-                        <div class="item-name">V-Drums Elektronik Davul Seti<br>VAD706-GN</div>
-                        <div class="item-meta">
-                            <span class="item-tag">Elektronik</span>
-                            <span class="item-tag">Profesyonel</span>
-                            <span class="item-tag green">✓ Stokta Var</span>
-                        </div>
-                    </div>
-                    <div class="item-bottom">
-                        <div class="qty-control">
-                            <button class="qty-btn" onclick="changeQty(-1)">−</button>
-                            <span class="qty-val" id="qty">1</span>
-                            <button class="qty-btn" onclick="changeQty(1)">+</button>
-                        </div>
-                        <button class="remove-btn">Sil</button>
-                    </div>
-                </div>
+        <div class="hero-content">
+            <div class="hero-tag">🎓 Öğrenciye özel – Yıllık ücretsiz</div>
+            <h1 class="hero-title">
+                <span class="highlight">P<span style="letter-spacing:-0.12em">L</span>AY</span><br>
+                ile keşfet.
+            </h1>
+            <p class="hero-desc">
+                Yapı Kredi Play Kart ile her alışverişte kazanın, ATM'de özgür olun ve dijital dünyada ayrıcalıklı
+                deneyim yaşayın.
+            </p>
+            <div class="hero-actions">
+                <button class="btn-primary"
+                    onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+                    Hemen Başvur
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+                <button class="btn-secondary"
+                    onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Özellikleri
+                    Gör</button>
             </div>
-
-            <!-- PLAY Promo Banner -->
-            <div class="play-promo">
-                <div class="promo-icon"><i data-lucide="zap" style="width: 24px; height: 24px; color: white;"></i></div>
-                <div class="promo-text">
-                    <strong>PLAY Kart Avantajı Aktif!</strong>
-                    <p>Yapı Kredi PLAY Kart sahipleri bu üründe %50 indirimden yararlanıyor. Fiyat farkını aşağıda
-                        görebilirsin.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-num">500<span>₺</span></div>
+                    <div class="stat-label">Aylık Play Harçlık</div>
                 </div>
-                <div class="promo-savings">
-                    <div class="save-label">Tasarruf</div>
-                    <div class="save-amount">%50</div>
+                <div class="stat">
+                    <div class="stat-num">0</div>
+                    <div class="stat-label">Yıllık Üyelik Ücreti</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">0</div>
+                    <div class="stat-label">Hesap İşletim Ücreti</div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT: SUMMARY -->
-        <div class="summary-panel">
-            <div class="summary-box">
-                <div class="summary-title">Sipariş Özeti</div>
-
-                <!-- Fiyat Karşılaştırması -->
-                <div class="compare-box">
-                    <div class="compare-row">
-                        <div class="compare-left">
-                            <span class="compare-type normal">Normal Fiyat</span>
-                            <span class="compare-desc">Standart ödeme</span>
-                        </div>
-                        <div class="compare-price normal" id="normal-price">79.999 ₺</div>
+        <div class="hero-visual">
+            <div style="position:relative">
+                <div class="glow-ring"></div>
+                <div class="glow-ring"></div>
+                <div class="glow-ring"></div>
+                <div class="card-wrap">
+                    <div class="card-3d">
+                        <img class="card-img" src="play kart_MC.png" alt="Yapı Kredi Play Kart">
                     </div>
-                    <div class="compare-row">
-                        <div class="compare-left">
-                            <span class="compare-type play">🟠 PLAY'li Fiyat</span>
-                            <span class="compare-desc">Yapı Kredi PLAY Kart ile</span>
-                        </div>
-                        <div class="compare-price play" id="play-price">39.999 ₺</div>
-                    </div>
-                </div>
-
-                <!-- Savings Pill -->
-                <div class="savings-pill">
-                    <span class="s-icon"><i data-lucide="wallet" style="width: 20px; height: 20px;"></i></span>
-                    <div>
-                        <div class="s-text">40.000 ₺ tasarruf ediyorsun!</div>
-                        <div class="s-sub">PLAY Kart ile %50 indirim</div>
-                    </div>
-                </div>
-
-                <!-- Detay Satırları -->
-                <div class="price-row">
-                    <span class="price-label">Ürün fiyatı</span>
-                    <span class="price-val crossed">79.999 ₺</span>
-                </div>
-                <div class="price-row">
-                    <span class="price-label" style="color: var(--orange);">PLAY Kart İndirimi</span>
-                    <span class="price-val" style="color: #4ADE80;">− 40.000 ₺</span>
-                </div>
-                <div class="price-row">
-                    <span class="price-label">Kargo</span>
-                    <span class="price-val" style="color: #4ADE80;">Ücretsiz</span>
-                </div>
-                <div class="price-row"
-                    style="margin-top: 8px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);">
-                    <span style="font-size:16px;font-weight:800;color:#fff;">Toplam</span>
-                    <span style="font-size:22px;font-weight:900;color:var(--orange);">39.999 ₺</span>
-                </div>
-
-                <!-- CTA -->
-                <a href="landing.html" class="cta-btn" style="margin-top:24px; display:flex; text-decoration:none;">
-                    <span>PLAY'ı Keşfet</span>
-                    <span class="arrow">→</span>
-                </a>
-
-                <div class="cta-note">
-                    Yapı Kredi PLAY Kart'ı edinip bu avantajdan yararlanmaya hemen başlayabilirsin.
-                </div>
-
-                <!-- Card visual -->
-                <div class="play-card-chip">
-                    <img class="chip-img" src="play kart_MC.png" alt="PLAY Kart">
-                    <div class="chip-text">
-                        <strong>Yapı Kredi PLAY Kart</strong>
-                        ile %50 özel indirim
-                    </div>
-                </div>
-
-                <!-- Trust -->
-                <div class="trust-row">
-                    <span class="trust-badge"><span class="t-icon"><i data-lucide="shield-check"
-                                style="width:14px; height:14px;"></i></span> Güvenli Ödeme</span>
-                    <span class="trust-badge"><span class="t-icon"><i data-lucide="refresh-ccw"
-                                style="width:14px; height:14px;"></i></span> Kolay İade</span>
-                    <span class="trust-badge"><span class="t-icon"><i data-lucide="zap"
-                                style="width:14px; height:14px;"></i></span> Hızlı Teslimat</span>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Also (blurred teaser) -->
-            <div class="also-row">
-                <h3>Benzer Ürünler</h3>
-                <div class="also-grid">
-                    <div class="also-card">
-                        <div class="also-thumb"></div>
-                        <div class="also-info">
-                            <div class="also-name"></div>
-                            <div class="also-price"></div>
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="features-inner">
+            <div class="features-header reveal">
+                <div class="section-label">Özellikler</div>
+                <h2 class="section-title">Hepsinde<br>en iyi,<br>keşfet.</h2>
+                <p class="section-sub" style="margin-top:16px">
+                    Play Kart, günlük hayatının her anında yanında. Alışverişten ATM'ye, onlinendan mobileya.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feat-card reveal" data-num="01">
+                    <div class="feat-icon"><i data-lucide="graduation-cap"></i></div>
+                    <h3>Sıfır Yıllık Ücret</h3>
+                    <p>Öğrenci belgesiyle başvuran tüm üniversite öğrencilerinden yıllık üyelik ücreti alınmaz.</p>
+                </div>
+                <div class="feat-card reveal" data-num="02" style="transition-delay:.1s">
+                    <div class="feat-icon"><i data-lucide="banknote"></i></div>
+                    <h3>Play Harçlık – 500 ₺</h3>
+                    <p>Her ay Yapı Kredi ATM'lerinden nakit çekim ücreti ve ilk 2 gün faizi ödemeden 500 ₺'ye kadar
+                        nakit çekin.</p>
+                </div>
+                <div class="feat-card reveal" data-num="03" style="transition-delay:.15s">
+                    <div class="feat-icon"><i data-lucide="star"></i></div>
+                    <h3>Play + World Fırsatları</h3>
+                    <p>Hem Play'e özel kampanyalar hem de World'ün tüm puan ve indirim fırsatlarından yararlan.</p>
+                </div>
+                <div class="feat-card reveal" data-num="04" style="transition-delay:.2s">
+                    <div class="feat-icon"><i data-lucide="tag"></i></div>
+                    <h3>Her Ay Yüzlerce TL Tasarruf</h3>
+                    <p>Pek çok sektördeki puan ve indirim kampanyalarıyla her ay yüzlerce TL tasarruf imkânı.</p>
+                </div>
+                <div class="feat-card reveal" data-num="05" style="transition-delay:.25s">
+                    <div class="feat-icon"><i data-lucide="arrow-left-right"></i></div>
+                    <h3>Ücretsiz EFT & Havale</h3>
+                    <p>Yapı Kredi Mobil ve İnternet Şubesi'nden yapacağın EFT ve Havaleler tamamen ücretsiz.</p>
+                </div>
+                <div class="feat-card reveal" data-num="06" style="transition-delay:.3s">
+                    <div class="feat-icon"><i data-lucide="inbox"></i></div>
+                    <h3>Gelen Havale Ücretsiz</h3>
+                    <p>Hesabına gelen havalelerden, döviz havaleleri dahil hiçbir ücret alınmaz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+        <div class="how-inner">
+            <div class="how-title-row reveal">
+                <div>
+                    <div class="section-label">Nasıl Çalışır</div>
+                    <h2 class="section-title">4 adımda<br>PLAY'i keşfet.</h2>
+                </div>
+                <p class="section-sub">Başvurudan kartınızı kullanmaya sadece birkaç tık mesafede.</p>
+            </div>
+            <div class="steps">
+                <div class="step reveal">
+                    <div class="step-num">1</div>
+                    <h3>Başvur</h3>
+                    <p>Yapı Kredi Mobil uygulamasından veya web sitesinden başvuru formunu doldurun.</p>
+                    <div class="step-connector"></div>
+                </div>
+                <div class="step reveal" style="transition-delay:.1s">
+                    <div class="step-num">2</div>
+                    <h3>Onaylan</h3>
+                    <p>Başvurunuz anında değerlendirilir. Birkaç dakika içinde yanıt alırsınız.</p>
+                    <div class="step-connector"></div>
+                </div>
+                <div class="step reveal" style="transition-delay:.2s">
+                    <div class="step-num">3</div>
+                    <h3>Kartını Al</h3>
+                    <p>Play Kartınız adresinize kargoya verilir. Beklerken dijital kartı hemen kullanın.</p>
+                    <div class="step-connector"></div>
+                </div>
+                <div class="step reveal" style="transition-delay:.3s">
+                    <div class="step-num">4</div>
+                    <h3>Kazanmaya Başla</h3>
+                    <p>İlk alışverişinizden itibaren avantajlar sizinle!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDENT SECTION -->
+    <section id="student">
+        <div class="student-inner">
+            <div class="student-grid">
+                <div class="reveal">
+                    <div class="section-label">Öğrenci Avantajları</div>
+                    <h2 class="section-title">Üniversite<br>hayatında<br><span style="color:var(--orange)">Play</span>
+                        farkı.</h2>
+                    <p class="section-sub" style="margin-top:16px">Öğrenci belgeni getir, avantajları topla. Tüm
+                        kampanyalar senin için aktif.</p>
+                    <div class="student-cards" style="margin-top:40px">
+                        <div class="sc reveal">
+                            <div class="sc-icon"><i data-lucide="graduation-cap"></i></div>
+                            <div class="sc-body">
+                                <h4>Yıllık Üyelik Ücreti Yok</h4>
+                                <p>Öğrenci belgesiyle başvur, yıllık ücretten tamamen muaf ol. Mezun olana kadar
+                                    geçerli.</p>
+                                <span class="sc-tag">0 ₺ / Yıl</span>
+                            </div>
+                        </div>
+                        <div class="sc reveal" style="transition-delay:.08s">
+                            <div class="sc-icon"><i data-lucide="landmark"></i></div>
+                            <div class="sc-body">
+                                <h4>Hesap İşletim Ücreti Yok</h4>
+                                <p>Hesabın için aylık veya yıllık işletim ücreti ödemek zorunda değilsin.</p>
+                                <span class="sc-tag">0 ₺ İşletim</span>
+                            </div>
+                        </div>
+                        <div class="sc reveal" style="transition-delay:.16s">
+                            <div class="sc-icon"><i data-lucide="globe"></i></div>
+                            <div class="sc-body">
+                                <h4>Play + World Çift Fırsat</h4>
+                                <p>Play'e özel kampanyalar ve World'ün tüm özelliklerinden aynı anda yararlan. İki
+                                    dünya, tek kart.</p>
+                                <span class="sc-tag">İkisi Birden</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="also-card">
-                        <div class="also-thumb"></div>
-                        <div class="also-info">
-                            <div class="also-name"></div>
-                            <div class="also-price"></div>
+                </div>
+                <div class="reveal" style="transition-delay:.15s">
+                    <div class="harc-spotlight">
+                        <div class="section-label" style="color:var(--orange)">Play Harçlık</div>
+                        <div class="harc-amount"><sup>₺</sup>500</div>
+                        <p style="font-size:18px;font-weight:700;margin-bottom:12px">Her ay, ihtiyacın olduğunda.</p>
+                        <p class="harc-desc">Yapı Kredi ATM'lerinden <strong style="color:#fff">nakit çekim ücreti
+                                ödemeden</strong> ve <strong style="color:#fff">ilk 2 gün nakit çekim faizi
+                                olmadan</strong> her ay 500 ₺'ye kadar para çekebilirsin.</p>
+                        <div class="harc-chips">
+                            <span class="harc-chip"><i data-lucide="landmark"></i> Yapı Kredi ATM</span>
+                            <span class="harc-chip"><i data-lucide="credit-card"></i> Ücretsiz Çekim</span>
+                            <span class="harc-chip"><i data-lucide="calendar-check"></i> İlk 2 Gün Faizsiz</span>
+                            <span class="harc-chip"><i data-lucide="refresh-cw"></i> Her Ay Yenilenir</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-    </div>
+    <!-- ZERO FEE STRIP -->
+    <section id="zerofee">
+        <div class="zee-inner">
+            <div class="reveal" style="text-align:center">
+                <div class="section-label" style="text-align:center">Sıfır Ücret Politikası</div>
+                <h2 class="section-title" style="text-align:center">Nerede ücret var?<br><span
+                        style="color:var(--orange)">Play'de yok.</span></h2>
+            </div>
+            <div class="fee-grid">
+                <div class="fee-card reveal">
+                    <div class="fee-icon"><i data-lucide="smartphone"></i></div>
+                    <div class="fee-big">0 ₺</div>
+                    <h4>EFT & Havale Ücreti</h4>
+                    <p>Yapı Kredi Mobil ve İnternet Şubesi üzerinden yapılan tüm EFT ve Havale işlemleri ücretsiz.</p>
+                </div>
+                <div class="fee-card reveal" style="transition-delay:.1s">
+                    <div class="fee-icon"><i data-lucide="arrow-down-to-line"></i></div>
+                    <div class="fee-big">0 ₺</div>
+                    <h4>Gelen Havale Kesintisi</h4>
+                    <p>Hesabına gönderilen tüm havaleler ücretsiz alınır. Döviz havaleleri de dahil.</p>
+                </div>
+                <div class="fee-card reveal" style="transition-delay:.2s">
+                    <div class="fee-icon"><i data-lucide="building-2"></i></div>
+                    <div class="fee-big">0 ₺</div>
+                    <h4>Hesap İşletim Ücreti</h4>
+                    <p>Hesabın aktif olduğu sürece aylık ya da yıllık hesap işletim ücreti ödenmez.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS BANNER -->
+    <section id="benefits">
+        <div class="benefits-inner">
+            <div class="benefits-header reveal">
+                <div class="section-label">Avantajlar</div>
+                <h2 class="section-title">Neden Play Kart?</h2>
+                <p class="section-sub" style="margin-top:16px">Rakiplerinden ayrışan özellikler, size özel tasarım.</p>
+                <ul class="benefits-list" style="margin-top:36px">
+                    <li>
+                        <div class="check-icon"><i data-lucide="check"></i></div> Öğrencilere yıllık üyelik ücreti yok
+                    </li>
+                    <li>
+                        <div class="check-icon"><i data-lucide="check"></i></div> Her ay 500 ₺ Play Harçlık (ücretsiz
+                        ATM)
+                    </li>
+                    <li>
+                        <div class="check-icon"><i data-lucide="check"></i></div> Play + World kampanyalarıyla çift
+                        avantaj
+                    </li>
+                    <li>
+                        <div class="check-icon"><i data-lucide="check"></i></div> EFT ve Havale işlemleri ücretsiz
+                    </li>
+                    <li>
+                        <div class="check-icon"><i data-lucide="check"></i></div> Gelen havalelerden (döviz dahil) ücret
+                        yok
+                    </li>
+                    <li>
+                        <div class="check-icon"><i data-lucide="check"></i></div> Hesap işletim ücreti yok
+                    </li>
+                </ul>
+            </div>
+            <div class="benefits-card-visual reveal">
+                <div class="benefits-card-wrap">
+                    <img src="YK PLAY_MC.png" alt="Yapı Kredi TLcard Play">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-inner">
+            <div class="section-label reveal" style="text-align:center">Hemen Başvur</div>
+            <h2 class="section-title reveal"> Keşfetmek mi istiyorsun?<br><span style="color:var(--orange)">Play</span>
+                başlasın.</h2>
+            <p class="section-sub reveal">Yapı Kredi Play Kart'a hemen başvur, fırsatları kaçırma. 0 ₺ yıllık ücret,
+                sonsuz avantaj.</p>
+            <div class="cta-actions reveal">
+                <button class="btn-primary" onclick="window.open('https://yapikrediplay.com.tr','_blank')">
+                    yapikrediplay.com.tr
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </button>
+            </div>
+            <div class="reveal" style="display:flex;justify-content:center;margin-top:48px">
+                <div class="qr-badge">
+                    <div class="qr-box">
+                        <img src="hemen basvur_QR.png" alt="QR Kod">
+                    </div>
+                    <div>
+                        <strong>QR Kodu Tarat</strong>
+                        Telefonunla hemen başvur
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="foot-left">
+            © 2025 Yapı Kredi Bankası A.Ş. – <a href="https://yapikredi.com.tr" target="_blank">yapikredi.com.tr</a><br>
+            <span style="font-size:11px;color:rgba(255,255,255,.2)">Bu sayfa tanıtım amaçlıdır. Kampanya koşulları için
+                yapikrediplay.com.tr adresini ziyaret edin.</span>
+        </div>
+        <div class="foot-links">
+            <a href="#">Gizlilik Politikası</a>
+            <a href="#">KVKK</a>
+            <a href="#">Şikâyet</a>
+        </div>
+    </footer>
 
     <script>
-        let qty = 1;
-        const prices = { normal: 79999, play: 39999 };
+        /* ─────────────────────────────────────────
+           TICKER
+        ───────────────────────────────────────── */
+        const msgs = [
+            "Yıllık Üyelik Ücreti Yok", "Play Harçlık – Aylık 500 ₺", "Ücretsiz EFT & Havale",
+            "Hesap İşletim Ücreti Yok", "Play + World Fırsatları", "Gelen Havale Ücretsiz",
+            "Her Ay Yüzlerce TL Tasarruf", "Nakit Çekim Faiz Yok (İlk 2 Gün)"
+        ];
+        const t = document.getElementById('ticker');
+        const markup = [...msgs, ...msgs].map(m => `<span class="ticker-item">⬡ ${m}</span>`).join('');
+        t.innerHTML = markup + markup;
 
-        function changeQty(delta) {
-            qty = Math.max(1, qty + delta);
-            document.getElementById('qty').textContent = qty;
+        /* ─────────────────────────────────────────
+           SCROLL PROGRESS BAR
+        ───────────────────────────────────────── */
+        const bar = document.createElement('div'); bar.id = 'progress-bar';
+        document.body.prepend(bar);
+        window.addEventListener('scroll', () => {
+            const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+            bar.style.width = pct + '%';
+            document.getElementById('navbar').style.background =
+                window.scrollY > 60 ? 'rgba(28,28,28,0.95)' : 'rgba(28,28,28,0.72)';
+        });
 
-            const fmt = n => n.toLocaleString('tr-TR') + ' ₺';
-            document.getElementById('normal-price').textContent = fmt(prices.normal * qty);
-            document.getElementById('play-price').textContent = fmt(prices.play * qty);
+        /* ─────────────────────────────────────────
+           PARTICLE CANVAS (hero background)
+        ───────────────────────────────────────── */
+        (function () {
+            const hero = document.getElementById('hero');
+            const c = document.createElement('canvas');
+            c.style.cssText = 'position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55';
+            hero.prepend(c);
+            const ctx = c.getContext('2d');
+            let W, H, pts = [];
+            const N = 55;
+            function resize() { W = c.width = hero.offsetWidth; H = c.height = hero.offsetHeight; }
+            resize(); window.addEventListener('resize', resize);
+            for (let i = 0; i < N; i++) pts.push({
+                x: Math.random() * W, y: Math.random() * H,
+                vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
+                r: Math.random() * 1.6 + .5
+            });
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                pts.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0 || p.x > W) p.vx *= -1;
+                    if (p.y < 0 || p.y > H) p.vy *= -1;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(242,101,34,.7)'; ctx.fill();
+                });
+                pts.forEach((a, i) => {
+                    for (let j = i + 1; j < pts.length; j++) {
+                        const b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < 130) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(242,101,34,${.18 * (1 - d / 130)})`;
+                            ctx.lineWidth = .7; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                        }
+                    }
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        /* ─────────────────────────────────────────
+           CARD SHINE OVERLAY
+        ───────────────────────────────────────── */
+        const cardWrap = document.querySelector('.card-wrap');
+        const cardEl = document.querySelector('.card-3d');
+        if (cardWrap && cardEl) {
+            const shine = document.createElement('div'); shine.className = 'card-shine';
+            cardEl.appendChild(shine);
+            cardWrap.addEventListener('mousemove', (e) => {
+                const r = cardWrap.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - .5;
+                const y = (e.clientY - r.top) / r.height - .5;
+                cardEl.style.transform = `rotateY(${x * 28}deg) rotateX(${-y * 18}deg) scale(1.04)`;
+                cardEl.style.boxShadow = `${-x * 30}px ${-y * 20}px 80px rgba(0,0,0,.7), 0 0 60px rgba(242,101,34,${0.1 + Math.abs(x) * .3})`;
+            });
+            cardWrap.addEventListener('mouseleave', () => {
+                cardEl.style.transform = '';
+                cardEl.style.boxShadow = '';
+                cardEl.style.animation = '';
+                setTimeout(() => { cardEl.style.animation = 'cardFloat 6s ease-in-out infinite'; }, 100);
+            });
         }
-    </script>
-    <script>
+
+        /* ─────────────────────────────────────────
+           MAGNETIC BUTTONS
+        ───────────────────────────────────────── */
+        document.querySelectorAll('.btn-primary,.btn-secondary,.nav-cta').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const r = btn.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width / 2) * .18;
+                const y = (e.clientY - r.top - r.height / 2) * .18;
+                btn.style.transform = `translate(${x}px,${y}px) scale(1.04)`;
+            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+        });
+
+        /* ─────────────────────────────────────────
+           COUNT-UP NUMBERS (stats + fee-big)
+        ───────────────────────────────────────── */
+        function countUp(el, target, duration = 1400, suffix = '') {
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - p, 4);
+                el.textContent = Math.round(ease * target) + suffix;
+                if (p < 1) requestAnimationFrame(step);
+                else { el.textContent = target + suffix; el.classList.add('counted'); }
+            }
+            requestAnimationFrame(step);
+        }
+        const counterIO = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                counterIO.unobserve(e.target);
+                const el = e.target;
+                const raw = el.dataset.target;
+                if (!raw) return;
+                countUp(el, parseInt(raw), 1600, el.dataset.suffix || '');
+            });
+        }, { threshold: .6 });
+        document.querySelectorAll('[data-target]').forEach(el => counterIO.observe(el));
+
+        /* ─────────────────────────────────────────
+           SCROLL REVEAL (enhanced stagger)
+        ───────────────────────────────────────── */
+        const revealIO = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    revealIO.unobserve(e.target);
+                }
+            });
+        }, { threshold: .12 });
+        document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+        /* ─────────────────────────────────────────
+           TYPEWRITER HERO SUBTITLE
+        ───────────────────────────────────────── */
+        (function () {
+            const el = document.querySelector('.hero-desc');
+            if (!el) return;
+            const text = el.textContent.trim();
+            el.textContent = '';
+            const cur = document.createElement('span'); cur.className = 'tw-cursor'; el.appendChild(cur);
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    cur.insertAdjacentText('beforebegin', text[i++]);
+                    setTimeout(type, i === 1 ? 900 : 22 + Math.random() * 18);
+                } else { setTimeout(() => cur.remove(), 800); }
+            }
+            setTimeout(type, 1100);
+        })();
+
+        /* ─────────────────────────────────────────
+           HARC-SPOTLIGHT PARALLAX
+        ───────────────────────────────────────── */
+        const harc = document.querySelector('.harc-spotlight');
+        if (harc) {
+            harc.addEventListener('mousemove', e => {
+                const r = harc.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - .5;
+                const y = (e.clientY - r.top) / r.height - .5;
+                harc.style.background = `radial-gradient(ellipse at ${50 + x * 40}% ${50 + y * 40}%,rgba(242,101,34,.2),rgba(242,101,34,.04) 70%)`;
+            });
+            harc.addEventListener('mouseleave', () => {
+                harc.style.background = '';
+            });
+        }
         lucide.createIcons();
     </script>
 </body>
